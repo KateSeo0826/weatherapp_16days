@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
 import Form from './components/form';
 import Weather from './components/weather';
 import HourlyWeather from './components/hourly_weather';
@@ -74,17 +73,17 @@ export default class App extends React.Component {
     const city = e.target.elements.city.value;
     const country = e.target.elements.country.value;
     if (city && country) {
-      const weather_apicall = await fetch(
+      const weather_apiCall = await fetch(
         `https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${API_KEY}&units=metric`
       );
-      const res = await weather_apicall.json();
+      const res = await weather_apiCall.json();
       this.setState({
         weathers: res.list
       })
 
-      const weather_day_apicall = await fetch(
+      const weather_day_apiCall = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}&units=metric`);
-      const data = await weather_day_apicall.json();
+      const data = await weather_day_apiCall.json();
       this.setState({
         city: `${res.city.name}, ${res.city.country}`,
         temperature: this.tempRoundUp(data.main.temp),
@@ -104,11 +103,11 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <div className="App">
+      <Fragment>
         <Form
-          loadweather ={this.getWeather}
-          error={this.state.error} 
-          />
+          loadWeather={this.getWeather}
+          error={this.state.error}
+        />
         <Weather
           city={this.state.city}
           country={this.state.country}
@@ -117,15 +116,14 @@ export default class App extends React.Component {
           temp_min={this.state.temp_min}
           description={this.state.description}
           iconWeather={this.state.icon}
-          humidity ={this.state.humidity}
-          wind ={this.state.wind}
+          humidity={this.state.humidity}
+          wind={this.state.wind}
         />
         <HourlyWeather
           iconWeather={this.state.icon}
-          weathers ={this.state.weathers}
+          weathers={this.state.weathers}
         />
-        
-      </div>
+      </Fragment>
     )
   }
 }

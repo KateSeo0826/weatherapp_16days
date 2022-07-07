@@ -1,18 +1,18 @@
 form{
     margin-top: 3rem;
 }
+
 form input[name="country"],
 form input[name="city"]{    
     background-color: transparent;
-    color: white;
     border: 0;
     border-bottom: 2px solid whitesmoke;
     border-radius: 0;
 
 }
 form input:focus{
-    background-color: transparent !important;
-    box-shadow: none !important;
+    background-color: transparent;
+    box-shadow: none;
 }
 .form-control::placeholder { 
     color: rgb(228, 228, 228); 
